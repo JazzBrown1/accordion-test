@@ -1,22 +1,23 @@
 # To Run the App
 
+Open a console in the folder you want to clone the repo.
+
 First clone the repo to your local.
 
 ```
 git clone https://github.com/JazzBrown1/accordion-test
 ```
 
-Open a command console in the project root directory.
-
-Then cd to the server npm package using.
+Then open the repo directory and the server sub-directory.
 
 ```
+cd accordion-test
 cd server
 ```
 
 Install server dependencies.
 
-*You may notice two high severity vulnerabilities, this is a recent issue with sqlite3 lib, its fixed on the master branch so the fix should be released soon*
+*You may notice some high severity vulnerabilities, this is a recent issue with sqlite3 lib, its fixed on the master branch so the fix should be in released soon*
 
 ```
 npm install
@@ -32,6 +33,7 @@ DB_USER=user
 DB_PASSWORD=storage
 DB_STORAGE=databases/database.sqlite
 ```
+*PORT and APP_PATH are reequired*
 
 Run `npm start` to start the server.
 
