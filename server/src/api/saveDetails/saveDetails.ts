@@ -14,10 +14,6 @@ export interface DetailsPayload {
   telephone: string,
 }
 
-export interface DetailsPayloadWDate extends DetailsPayload {
-  dob: Date,
-}
-
 const validateAll = (data: DetailsPayload): boolean => {
   if (
     !validate.firstname(data.firstname)
