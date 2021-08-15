@@ -8,7 +8,6 @@ const ex = {
   plugins: [
     typescript({ lib: ['es5', 'es6', 'dom'], target: 'es6' }),
   ],
-  external: [],
 };
 
 export default ex;

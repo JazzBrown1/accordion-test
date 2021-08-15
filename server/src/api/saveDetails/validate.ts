@@ -6,26 +6,26 @@ const validate = {
   firstname: (firstname: string): boolean => (
     normChars.test(firstname)
     && firstname.length > 1
-    && firstname.length < 30
+    && firstname.length <= 30
   ),
   surname: (surname: string): boolean => (
     normChars.test(surname)
     && surname.length > 1
-    && surname.length < 30
+    && surname.length <= 30
   ),
   email: (emailAd: string): boolean => (
     email.test(emailAd)
     && emailAd.length > 5
-    && emailAd.length < 80
+    && emailAd.length <= 80
   ),
   dob: (dob: Date | boolean): boolean => (dob instanceof Date),
   gender: (gender: string): boolean => gender === 'M' || gender === 'F',
   telephone: (phonenumber: string): boolean => (
     number.test(phonenumber)
     && phonenumber.length > 1
-    && phonenumber.length < 30
+    && phonenumber.length <= 30
   ),
-  comments: (comments: string): boolean => comments.length < 300,
+  comments: (comments: string): boolean => comments.length <= 300,
 };
 
 export default validate;

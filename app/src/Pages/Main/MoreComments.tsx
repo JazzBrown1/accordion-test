@@ -17,6 +17,7 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
   const [genderError, setGenderError] = useState(false);
   const [dob, setDob] = useState<SimpleDate>({ mm: 0, yy: 0, dd: 0 });
   const [DOBError, setDOBError] = useState(false);
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const parse = () => {
     let error = false;
@@ -37,10 +38,12 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
 
   const handleNext = () => {
     if (parse()) onComplete({ phoneNumber, gender, dob });
+    else setShouldValidate(true);
   };
 
   const handleClose = (newTab: AccordionSlotKey) => {
     if (parse()) onComplete({ phoneNumber, gender, dob }, newTab);
+    else setShouldValidate(true);
   };
 
   return (
@@ -49,10 +52,11 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
       <label className={`input-label${phoneNumberError ? ' error' : ''}`}>
         <p>Telephone Number</p>
         <input
+          maxLength={30}
           type="number"
           value={phoneNumber}
           onChange={(e) => { setPhoneNumber(e.target.value); }}
-          onBlur={parse}
+          onBlur={() => { if (shouldValidate) parse(); }}
         />
       </label>
 
@@ -61,6 +65,7 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
         <div className="select-wrapper">
           <span className="select-v">v</span>
           <select
+            onBlur={() => { if (shouldValidate) parse(); }}
             onChange={(e) => {
               setGender(e.target.value);
               setGenderError(false);
@@ -80,8 +85,10 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
         <p>Dob</p>
         <input
           type="number"
+          maxLength={2}
           value={dob.dd || ''}
           className="dob-input"
+          onBlur={() => { if (shouldValidate) parse(); }}
           onChange={(e) => {
             setDob((oldState) => {
               const newState = { ...oldState };
@@ -92,8 +99,10 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
         />
         <input
           type="number"
+          maxLength={2}
           value={dob.mm || ''}
           className="dob-input"
+          onBlur={() => { if (shouldValidate) parse(); }}
           onChange={(e) => {
             setDob((oldState) => {
               const newState = { ...oldState };
@@ -104,8 +113,10 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
         />
         <input
           type="number"
+          maxLength={4}
           value={dob.yy || ''}
           className="dob-input"
+          onBlur={() => { if (shouldValidate) parse(); }}
           onChange={(e) => {
             setDob((oldState) => {
               const newState = { ...oldState };

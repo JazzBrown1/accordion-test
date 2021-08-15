@@ -63,19 +63,19 @@ const number = /^[0-9]*$/;
 const validate = {
     firstname: (firstname) => (normChars.test(firstname)
         && firstname.length > 1
-        && firstname.length < 30),
+        && firstname.length <= 30),
     surname: (surname) => (normChars.test(surname)
         && surname.length > 1
-        && surname.length < 30),
+        && surname.length <= 30),
     email: (emailAd) => (email.test(emailAd)
         && emailAd.length > 5
-        && emailAd.length < 80),
+        && emailAd.length <= 80),
     dob: (dob) => (dob instanceof Date),
     gender: (gender) => gender === 'M' || gender === 'F',
     telephone: (phonenumber) => (number.test(phonenumber)
         && phonenumber.length > 1
-        && phonenumber.length < 30),
-    comments: (comments) => comments.length < 300,
+        && phonenumber.length <= 30),
+    comments: (comments) => comments.length <= 300,
 };
 
 const validateAll = (data) => {

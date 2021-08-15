@@ -12,6 +12,7 @@ interface Props {
 const FinalCommentsTab = ({ onComplete } : Props) => {
   const [comments, setComments] = useState<string>('');
   const [commentsError, setCommentsError] = useState<boolean>(false);
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const parse = () => {
     let error = false;
@@ -24,10 +25,12 @@ const FinalCommentsTab = ({ onComplete } : Props) => {
 
   const handleNext = () => {
     if (parse()) onComplete({ comments });
+    else setShouldValidate(true);
   };
 
   const handleClose = (newTab: AccordionSlotKey) => {
     if (parse()) onComplete({ comments }, newTab);
+    else setShouldValidate(true);
   };
 
   return (
@@ -35,7 +38,11 @@ const FinalCommentsTab = ({ onComplete } : Props) => {
 
       <label className={`input-label${commentsError ? ' error' : ''}`}>
         <p>Comments</p>
-        <textarea value={comments} onChange={(e) => { setComments(e.target.value); }} />
+        <textarea
+          onBlur={() => { if (shouldValidate) parse(); }}
+          value={comments}
+          onChange={(e) => { setComments(e.target.value); }}
+        />
       </label>
 
     </AccordionTab>

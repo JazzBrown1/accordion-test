@@ -1,5 +1,11 @@
 # To Run the App
 
+First clone the repo to your local.
+
+```
+git clone https://github.com/JazzBrown1/accordion-test
+```
+
 Open a command console in the project root directory.
 
 Then cd to the server npm package using.

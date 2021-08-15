@@ -24,6 +24,7 @@ const DetailsTab = ({ onComplete } : Props) => {
   const [snError, setSnError] = useState(false);
   const [email, setEmail] = useState<string>('');
   const [emError, setEmError] = useState(false);
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   // eslint-disable-next-line no-shadow
   const parse = () => {
@@ -45,10 +46,12 @@ const DetailsTab = ({ onComplete } : Props) => {
 
   const handleNext = () => {
     if (parse()) onComplete({ firstname, surname, email });
+    else setShouldValidate(true);
   };
 
   const handleClose = (newTab: AccordionSlotKey) => {
     if (parse()) onComplete({ firstname, surname, email }, newTab);
+    else setShouldValidate(true);
   };
 
   return (
@@ -58,9 +61,10 @@ const DetailsTab = ({ onComplete } : Props) => {
         <p>First Name</p>
         <input
           type="text"
+          maxLength={30}
           value={firstname}
           onChange={(e) => { setFirstName(e.target.value); }}
-          onBlur={parse}
+          onBlur={() => { if (shouldValidate) parse(); }}
         />
       </label>
 
@@ -68,9 +72,10 @@ const DetailsTab = ({ onComplete } : Props) => {
         <p>Surname</p>
         <input
           type="text"
+          maxLength={30}
           value={surname}
           onChange={(e) => { setSurname(e.target.value); }}
-          onBlur={parse}
+          onBlur={() => { if (shouldValidate) parse(); }}
         />
       </label>
 
@@ -80,9 +85,10 @@ const DetailsTab = ({ onComplete } : Props) => {
         <p>Email Address</p>
         <input
           type="email"
+          maxLength={80}
           value={email}
           onChange={(e) => { setEmail(e.target.value); }}
-          onBlur={parse}
+          onBlur={() => { if (shouldValidate) parse(); }}
         />
       </label>
 
