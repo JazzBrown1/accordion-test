@@ -50,25 +50,28 @@ interface Props {
 }
 
 function Main({ sendData, networkError } : Props) {
-  const [openTab, setOpenTab] = useState<string | number>('1');
+  const [openTab, setOpenTab] = useState<string | number>('details');
   const combinedTabDataRef = useRef<CombinedTabData>({});
 
   const detailsOnComplete = (data: DetailsTabData, nextTab?: AccordionSlotKey | undefined) => {
     combinedTabDataRef.current.details = data;
     if (nextTab) setOpenTab(nextTab);
-    else setOpenTab('2');
+    else setOpenTab('more');
   };
 
   const moreOnComplete = (data: MoreTabData, nextTab?: AccordionSlotKey | undefined) => {
     combinedTabDataRef.current.more = data;
     if (nextTab) setOpenTab(nextTab);
-    else setOpenTab('3');
+    else setOpenTab('final');
   };
 
   const finalOnComplete = (data: FinalTabData, nextTab: AccordionSlotKey | undefined) => {
     combinedTabDataRef.current.final = data;
     if (nextTab) setOpenTab(nextTab);
-    sendData(combinedTabDataRef.current);
+    // If user skips steps they are forced to go back
+    else if (!combinedTabDataRef.current.details) setOpenTab('details');
+    else if (!combinedTabDataRef.current.more) setOpenTab('more');
+    else sendData(combinedTabDataRef.current);
   };
 
   return (

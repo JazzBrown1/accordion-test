@@ -34,7 +34,7 @@ const FinalCommentsTab = ({ onComplete } : Props) => {
   };
 
   return (
-    <AccordionTab slotKey="3" title="Step 3: Final comments" onNext={handleNext} onClose={handleClose}>
+    <AccordionTab slotKey="final" title="Step 3: Final comments" onNext={handleNext} onClose={handleClose}>
 
       <label className={`input-label${commentsError ? ' error' : ''}`}>
         <p>Comments</p>

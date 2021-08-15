@@ -55,7 +55,7 @@ const DetailsTab = ({ onComplete } : Props) => {
   };
 
   return (
-    <AccordionTab slotKey="1" title="Step 1: Your details" onNext={handleNext} onClose={handleClose}>
+    <AccordionTab slotKey="details" title="Step 1: Your details" onNext={handleNext} onClose={handleClose}>
 
       <label className={`input-label${fnError ? ' error' : ''}`}>
         <p>First Name</p>

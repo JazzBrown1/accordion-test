@@ -47,7 +47,7 @@ const MoreCommentsTab = ({ onComplete } : Props) => {
   };
 
   return (
-    <AccordionTab slotKey="2" title="Step 2: More comments" onNext={handleNext} onClose={handleClose}>
+    <AccordionTab slotKey="more" title="Step 2: More comments" onNext={handleNext} onClose={handleClose}>
 
       <label className={`input-label${phoneNumberError ? ' error' : ''}`}>
         <p>Telephone Number</p>
